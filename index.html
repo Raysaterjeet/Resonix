@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='device-width, initial-scale=1.0'>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Kanit&display=swap' rel='stylesheet'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='icon' href='data:;base64,iVBORw0KGgo='><!--to resolve favicon.ico error-->
+    <meta name='viewport' content='width=device-width, user-scalable=no'>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .mobile{
+            max-width: 150px;
+        }
+
+        .wrapper {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background: linear-gradient(0deg, #071D6B, #54B7BD);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-repeat: no-repeat;
+        }
+
+        .connect {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 12rem;
+            width: 12rem;
+            border-radius: 6rem;
+            background: linear-gradient(0deg, #225388, #38809F);
+            font-family: 'Kanit', sans-serif;
+            color: #CAF0F8;
+            font-size: 1.5rem;
+            border-style: dashed;
+            border-color: #00B4D8;
+            z-index: 1000;
+        }
+
+        .tapAnimation {
+            animation: tapAnimation 0.5s;
+        }
+
+        @keyframes tapAnimation {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            50% {
+                transform: scale(0.8, 0.8);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .findingDevice {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+            bottom: 9.5rem;
+        }
+
+        .circle1 {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 5rem;
+            width: 5rem;
+            background: linear-gradient(0deg, #225388, #148dc1);
+            left: 8.5rem;
+            top: 13.5rem;
+        }
+
+        .wrapper>.mobile {
+            position: absolute;
+            mix-blend-mode: multiply;
+            filter: contrast(2);
+            height: 15%;
+            width: 30%;
+            border-radius: 5rem;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .circle2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10rem;
+            width: 10rem;
+            border-radius: 5rem;
+            opacity: 0.75;
+            background-color: #00b4d8be;
+            transform: scale(0, 0);
+        }
+
+        .circle3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 16rem;
+            width: 16rem;
+            border-radius: 8rem;
+            opacity: 0.75;
+            background-color: #00b4d89b;
+            transform: scale(0, 0);
+        }
+
+        .circle4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 22rem;
+            width: 22rem;
+            border-radius: 11rem;
+            opacity: 0.75;
+            background-color: #00b4d877;
+            transform: scale(0, 0);
+        }
+
+        .pulseAnimation {
+            animation: pulseAnimation infinite 2s;
+        }
+
+        @keyframes pulseAnimation {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1.2, 1.2);
+                opacity: 0;
+            }
+        }
+
+        .textPulseAnimation {
+            animation: textPulseAnimation infinite 2s;
+        }
+
+        @keyframes textPulseAnimation {
+            0% {
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.1;
+            }
+        }
+
+        .mobilePulseAnimation {
+            animation: mobilePulseAnimation infinite 2s;
+        }
+
+        @keyframes mobilePulseAnimation {
+            0% {
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.1;
+            }
+        }
+
+        .findingDevice>.text {
+            position: relative;
+            bottom: 5rem;
+            text-align: center;
+            font-family: 'Kanit', sans-serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1rem 1rem 2rem black;
+        }
+
+        .connected {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 12rem;
+            width: 12rem;
+            border-radius: 6rem;
+            background: linear-gradient(0deg, #225388, #38809F);
+            font-family: 'Kanit', sans-serif;
+            color: #CAF0F8;
+            font-size: 1.5rem;
+            border: 0.2rem solid #00B4D8;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .optimizing {
+            position: absolute;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-bottom: 1rem;
+            gap: 5rem;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .optimizing>.text {
+            position: relative;
+            font-family: 'Kanit', sans-serif;
+            color: #0d6273;
+            font-size: 3rem;
+            text-align: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .percentage {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 12rem;
+            width: 12rem;
+            border-radius: 6rem;
+            background: linear-gradient(0deg, #225388, #38809F);
+            font-family: 'Kanit', sans-serif;
+            color: #CAF0F8;
+            font-size: 2rem;
+            bottom: 13.3rem;
+            border: 0.2rem solid #00B4D8;
+        }
+
+        .connectedOutAnimation {
+            animation: connectedOutAnimation 2s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes connectedOutAnimation {
+            0% {
+                transform: scale(1, 1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(5, 5);
+                opacity: 0;
+            }
+        }
+
+        .optInAnimation {
+            animation: optInAnimation 2s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes optInAnimation {
+            0% {
+                transform: scale(8, 8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1, 1);
+                opacity: 1;
+                z-index: 100;
+            }
+        }
+
+        .optPercentageAnimation {
+            animation: optPercentageAnimation infinite 2s;
+        }
+
+        @keyframes optPercentageAnimation {
+            0% {
+                transform: scale(1, 1);
+            }
+
+            50% {
+                transform: scale(0.9, 0.9);
+            }
+
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .arrowContainer img {
+            z-index: 1000;
+            position: relative;
+            height: 7rem;
+            width: 3rem;
+            animation: arrowAnimation infinite 1s;
+        }
+
+        @keyframes arrowAnimation {
+            0% {
+                bottom: 22rem;
+            }
+
+            100% {
+                bottom: -22rem;
+            }
+        }
+
+        .arrowContainer {
+            position: absolute;
+            overflow: hidden;
+            height: 35rem;
+            width: 3rem;
+            top: 60%;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .bolt {
+            position: relative;
+            animation: bolt 2s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes bolt {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1, 1);
+                opacity: 1;
+            }
+        }
+        .freq {
+            position: absolute;
+            bottom: 10%;
+            font-family: 'Kanit', sans-serif;
+            color: white;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='connect'>
+            <span>Connect</span>
+        </div>
+        <img src='https://png.pngtree.com/png-vector/20210121/ourmid/pngtree-mobile-phone-mockup-front-side-design-vector-illustration-png-image_2775276.jpg'
+            alt='' class='mobile'>
+        <div class='findingDevice'>
+            <div class='text'>Searching</div>
+            <div class='circle4'>
+                <div class='circle3'>
+                    <div class='circle2'></div>
+                </div>
+            </div>
+        </div>
+        <div class='connected'>
+            Connected
+        </div>
+        <div class='optimizing'>
+            <h1 class='text'>Optimizing</h1>
+            <div class='percentage'>
+                0%
+            </div>
+            <div class='arrowContainer'>
+                <a href='https://ibb.co/QHdn7fq'><img src='https://i.ibb.co/s1HQp2D/arrow2.png' alt='arrow2'
+                         border='0'></a>
+            </div>
+            <h3 class="freq">100 Ghz</h3>
+        </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.2/mo.js'></script>
+    <script>
+        var audio = new Audio("/sounds/connected.mp3");
+        var audio1 = new Audio("/sounds/optimizing.mp3");
+        const burst = new mojs.Burst({
+            radius: { 0: 200 },
+            count: 500,
+            children: {
+                shape: 'polygon',
+                points: 5,
+                fill: { 'cyan': 'yellow' },
+                rotate: { 360: 0 },
+                duration: 1000,
+                delay: 'stagger( rand(0, 5) )'
+            }
+        });
+        $('.connect').on('click', function (e) {
+            var flag = "true";
+            // Make an HTTP request to the ESP32 server
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/setVariable?data=" + flag, true);
+            xhr.send();
+            $('.connect').unbind();
+            $('.connect').addClass('tapAnimation');
+            burst.replay();
+            setTimeout(function () { $('.connect').removeClass('tapAnimation'); }, 500);
+            setTimeout(() => {
+                $('.connect').animate({ opacity: '0' }, 'slow');
+                $('.connect').animate({ zIndex: '-1' });
+            }, 2200);
+            setTimeout(() => {
+                $('.findingDevice').animate({ opacity: '1' }, 'slow');
+                $('.findingDevice').animate({ zIndex: '10' });
+            }, 1200);
+            $('.circle2').addClass('pulseAnimation');
+            $('.circle3').addClass('pulseAnimation');
+            $('.circle4').addClass('pulseAnimation');
+            $('.findingDevice>.text').addClass('textPulseAnimation');
+            $('.wrapper>.mobile').animate({ zIndex: '1' });
+            $('.wrapper>.mobile').addClass('mobilePulseAnimation');
+            setTimeout(() => {
+                var conditionMet = false; // Initialize the variable to false
+                var interval = setInterval(function () {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var response = JSON.parse(this.responseText);
+                            if (response.conditionMet == true) {
+                                fetch('/run-script', { method: 'POST' })
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        console.log(data);
+                                    })
+                                    .catch(error => {
+                                        console.error(error);
+                                    });
+                                $('.findingDevice').animate({ opacity: '0' }, 'slow');
+                                $('.findingDevice').animate({ zIndex: '-1' });
+                                $('.wrapper>.mobile').animate({ opacity: '0' });
+                                $('.wrapper>.mobile').animate({ zIndex: '-1' });
+                                $('.connected').animate({ opacity: '1' }, 'slow');
+                                $('.connected').animate({ zIndex: '1000' });
+                                setTimeout(() => {
+                                    audio.play();
+                                }, 800);
+                                setTimeout(() => {
+                                    $('.connected').addClass('connectedOutAnimation');
+                                    setTimeout(() => {
+                                        $('.optimizing').addClass('optInAnimation');
+                                    }, 1400);
+                                    setTimeout(() => {
+                                        var finalFrequency = 0;
+                                        function calcResponse() {
+                                            return Math.floor((Math.random() * 300 + 3.5));
+                                        }
+                                        finalFrequency = calcResponse();
+                                        audio1.play();
+                                        $('.optimizing>.percentage').addClass('optPercentageAnimation');
+                                        $('.optimizing>.percentage').css('z-index', '1');
+                                        $('.optimizing>.arrowContainer').animate({ opacity: '1' });
+                                        $('.optimizing>.arrowContainer').animate({ zIndex: '0' });
+                                        $('.optimizing .freq').addClass('textPulseAnimation');
+                                        const startTime = new Date().getTime();
+                                        /*console.log(startTime);*/
+                                        interval2 = setInterval(function () {
+                                            var frequency = Math.floor(Math.random() * 300 + 3);
+                                            $('.optimizing .freq').text(frequency + " Ghz");
+                                            const endTime = new Date().getTime();
+                                            /*console.log(endTime);*/
+                                            const executionTime = endTime - startTime;
+                                            console.log("executionTime: " + executionTime + " ms");
+                                            if (executionTime > delay * 100) {
+                                                clearInterval(interval2);
+                                                setTimeout(function () {
+                                                    function updateFrequency(newValue) {
+                                                        finalFrequency = newValue;
+                                                    }
+                                                    var interval3 = setInterval(function () {
+                                                        var xhttp3 = new XMLHttpRequest();
+                                                        xhttp3.onreadystatechange = function () {
+                                                            if (this.readyState == 4 && this.status == 200) {
+                                                                updateFrequency(this.responseText);
+                                                                clearInterval(interval3);
+                                                            }
+                                                        };
+                                                        xhttp3.open("GET", "/getFinalFrequency", true);
+                                                        xhttp3.send();
+                                                    }, 1000);
+                                                    $(".optimizing .freq").text("Optimized Frequency: " + finalFrequency + " Ghz");
+                                                }, 1000)
+                                            }
+                                        }, 100);
+                                    }, 3000);
+                                    $('.optimizing>.text').addClass('textPulseAnimation');
+                                }, 2500);
+                                var delay = 0;
+                                function updateDelay(newValue) {
+                                    delay = newValue;
+                                }
+                                var interval1 = setInterval(function () {
+                                    var xhttp = new XMLHttpRequest();
+                                    xhttp.onreadystatechange = function () {
+                                        if (this.readyState == 4 && this.status == 200) {
+                                            updateDelay(parseFloat(this.responseText));
+                                            clearInterval(interval1);
+                                        }
+                                    };
+                                    xhttp.open("GET", "/getVariableValue", true);
+                                    xhttp.send();
+                                }, 1000);
+                                setTimeout(() => {
+                                    function sleep(ms) {
+                                        return new Promise(
+                                            resolve => setTimeout(resolve, ms)
+                                        );
+                                    }
+                                    var i = 1;
+                                    async function counter() {
+                                        while (i <= 100) {
+                                            $('.optimizing>.percentage').html(i + '%');
+                                            i++;
+                                            await sleep(delay);
+                                        }
+                                        audio1.pause();
+                                        $('.optimizing>.percentage').removeClass('optPercentageAnimation');
+                                        $('.optimizing>.text').removeClass('textPulseAnimation');
+                                        $('.optimizing>.percentage').css('z-index', '-1');
+                                        $('.optimizing>.arrowContainer').animate({ opacity: '0' });
+                                        $('.optimizing>.arrowContainer').animate({ zIndex: '-1' });
+                                        $('.optimizing>.text').animate({ opacity: '0' });
+                                        $('.optimizing>.text').html('Optimized');
+                                        $('.optimizing>.text').animate({ opacity: '1' });
+                                        $('.optimizing>.percentage').html('<a href=\'https://ibb.co/58VP34T\'><img src=\'https://i.ibb.co/6P5kSwY/bolt.png\' alt=\'bolt\' class=\'bolt\' border=\'0\'></a>');
+                                    }
+                                    counter();
+                                }, 6000);
+                            }
+                            clearInterval(interval);
+                        }
+                        else {
+                            conditionMet = false;
+                        }
+                    };
+                    xhttp.open("GET", "/checkCondition", true);
+                    xhttp.send();
+                }, 1000); // Poll every second
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
